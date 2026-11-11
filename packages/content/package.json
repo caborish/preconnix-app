@@ -1,0 +1,8 @@
+{
+  "name": "@preconnix/content",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Editable content shared by the API (seed + validation) and the app (offline fallback): lessons, settings defaults, suggested goals.",
+  "exports": { ".": "./src/index.ts" }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@preconnix/assessment-engine",
+  "version": "1.0.0",
+  "description": "Validates and scores PreConnix assessments (server only). The ./routing export is the only part the app may import.",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./routing": "./src/routing.ts"
+  }
+}

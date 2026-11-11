@@ -1,0 +1,374 @@
+{
+  "policyId": "rra-legacy-1.0.0",
+  "definitionId": "rra-defs-legacy-1",
+  "status": "testing",
+  "isLegacyParity": true,
+  "scoringStatus": "legacy_unvalidated",
+  "source": {
+    "file": "legacy/source/legacy_rra.html",
+    "sha256": "fa4589dbfa3ffc1d3e8a911ec8a44e625f41d5e6b5b9e5df9657060cde690a5f"
+  },
+  "rounding": "half_up_integer",
+  "aggregation": "sum_of_points",
+  "itemPoints": {
+    "b10.a": 2,
+    "b10.b": 1,
+    "b10.c": 0,
+    "b11.a": 2,
+    "b11.b": 1,
+    "b11.c": 0,
+    "b12.a": 2,
+    "b12.b": 1,
+    "b12.c": 0,
+    "b13.a": 2,
+    "b13.b": 1,
+    "b13.c": 0,
+    "b14.a": 2,
+    "b14.b": 1,
+    "b14.c": 0,
+    "b15.a": 2,
+    "b15.b": 1,
+    "b15.c": 0,
+    "b16.a": 2,
+    "b16.b": 1,
+    "b16.c": 0,
+    "b17.a": 2,
+    "b17.b": 1,
+    "b17.c": 0,
+    "b18.a": 2,
+    "b18.b": 1,
+    "b18.c": 0,
+    "c19.a": 2,
+    "c19.b": 1,
+    "c19.c": 0,
+    "c20.a": 2,
+    "c20.b": 1,
+    "c20.c": 0,
+    "c21.a": 2,
+    "c21.b": 1,
+    "c21.c": 0,
+    "c22.a": 2,
+    "c22.b": 1,
+    "c22.c": 0,
+    "c23.a": 2,
+    "c23.b": 1,
+    "c23.c": 0,
+    "c24.a": 2,
+    "c24.b": 1,
+    "c24.c": 0,
+    "c25.a": 2,
+    "c25.b": 1,
+    "c25.c": 0,
+    "c26.a": 2,
+    "c26.b": 1,
+    "c26.c": 0,
+    "c27.a": 2,
+    "c27.b": 1,
+    "c27.c": 0,
+    "d28.a": 2,
+    "d28.b": 1,
+    "d28.c": 0,
+    "d29.a": 2,
+    "d29.b": 1,
+    "d29.c": 0,
+    "d30.a": 2,
+    "d30.b": 1,
+    "d30.c": 0,
+    "d31.a": 2,
+    "d31.b": 1,
+    "d31.c": 0,
+    "d32.a": 2,
+    "d32.b": 1,
+    "d32.c": 0,
+    "e33.a": 2,
+    "e33.b": 1,
+    "e33.c": 0,
+    "e34.a": 2,
+    "e34.b": 1,
+    "e34.c": 0,
+    "e35.a": 2,
+    "e35.b": 1,
+    "e35.c": 0,
+    "e36.a": 2,
+    "e36.b": 1,
+    "e36.c": 0,
+    "e37.a": 2,
+    "e37.b": 1,
+    "e37.c": 0,
+    "e38.a": 2,
+    "e38.b": 1,
+    "e38.c": 0,
+    "e39.a": 2,
+    "e39.b": 1,
+    "e39.c": 0,
+    "e40.a": 2,
+    "e40.b": 1,
+    "e40.c": 0,
+    "e41.a": 2,
+    "e41.b": 1,
+    "e41.c": 0,
+    "e42.a": 2,
+    "e42.b": 1,
+    "e42.c": 0,
+    "e43.a": 2,
+    "e43.b": 1,
+    "e43.c": 0,
+    "e44.a": 2,
+    "e44.b": 1,
+    "e44.c": 0,
+    "e45.a": 2,
+    "e45.b": 1,
+    "e45.c": 0,
+    "n1.a": 2,
+    "n1.b": 1,
+    "n1.c": 0,
+    "n2.a": 2,
+    "n2.b": 1,
+    "n2.c": 0,
+    "n3.a": 2,
+    "n3.b": 1,
+    "n3.c": 0,
+    "n4.a": 2,
+    "n4.b": 1,
+    "n4.c": 0,
+    "n5.a": 2,
+    "n5.b": 1,
+    "n5.c": 0,
+    "n6.a": 2,
+    "n6.b": 1,
+    "n6.c": 0,
+    "n7.a": 2,
+    "n7.b": 1,
+    "n7.c": 0,
+    "n8.a": 2,
+    "n8.b": 1,
+    "n8.c": 0,
+    "n9.a": 2,
+    "n9.b": 1,
+    "n9.c": 0,
+    "n10.a": 2,
+    "n10.b": 1,
+    "n10.c": 0,
+    "n11.a": 2,
+    "n11.b": 1,
+    "n11.c": 0,
+    "n12.a": 2,
+    "n12.b": 1,
+    "n12.c": 0,
+    "n13.a": 2,
+    "n13.b": 1,
+    "n13.c": 0,
+    "n14.a": 2,
+    "n14.b": 1,
+    "n14.c": 0,
+    "n15.a": 2,
+    "n15.b": 1,
+    "n15.c": 0,
+    "n16.a": 2,
+    "n16.b": 1,
+    "n16.c": 0,
+    "n17.a": 2,
+    "n17.b": 1,
+    "n17.c": 0,
+    "n18.a": 2,
+    "n18.b": 1,
+    "n18.c": 0
+  },
+  "profilePoints": {
+    "pregnancy_planning": {
+      "age": {
+        "20-34": 2,
+        "35-39": 1,
+        "u20": 1,
+        "40+": 0
+      }
+    },
+    "general_wellness": {}
+  },
+  "domains": {
+    "pregnancy_planning": [
+      {
+        "code": "demographics_timing",
+        "name": "Demographics & Timing",
+        "items": [
+          "profile.age"
+        ]
+      },
+      {
+        "code": "obstetric_history",
+        "name": "Reproductive & Obstetric History",
+        "items": [
+          "b10",
+          "b11",
+          "b12",
+          "b13",
+          "b14",
+          "b15",
+          "b16",
+          "b17",
+          "b18"
+        ],
+        "sectionId": "P1B"
+      },
+      {
+        "code": "physical_medical",
+        "name": "Physical Health & Medical Care",
+        "items": [
+          "c19",
+          "c20",
+          "c21",
+          "c22",
+          "c23",
+          "c24",
+          "c25",
+          "c26",
+          "c27"
+        ]
+      },
+      {
+        "code": "sexual_substance",
+        "name": "Sexual & Substance Health",
+        "items": [
+          "d28",
+          "d29",
+          "d30",
+          "d31",
+          "d32"
+        ]
+      },
+      {
+        "code": "mental_social_env",
+        "name": "Mental, Social & Environmental",
+        "items": [
+          "e33",
+          "e34",
+          "e35",
+          "e36",
+          "e37",
+          "e38",
+          "e39",
+          "e40",
+          "e41",
+          "e42",
+          "e43",
+          "e44",
+          "e45"
+        ]
+      }
+    ],
+    "general_wellness": [
+      {
+        "code": "family_planning",
+        "name": "Family Planning & Contraception",
+        "items": [
+          "n1",
+          "n2",
+          "n3",
+          "n4"
+        ]
+      },
+      {
+        "code": "physical_nutrition",
+        "name": "Physical & Nutritional Health",
+        "items": [
+          "n5",
+          "n6"
+        ]
+      },
+      {
+        "code": "infectious_immunization",
+        "name": "Infectious Diseases & Immunizations",
+        "items": [
+          "n7",
+          "n8"
+        ]
+      },
+      {
+        "code": "chronic_medications",
+        "name": "Chronic Conditions & Medications",
+        "items": [
+          "n9",
+          "n10"
+        ]
+      },
+      {
+        "code": "substance_use",
+        "name": "Substance Use",
+        "items": [
+          "n11",
+          "n12",
+          "n13"
+        ]
+      },
+      {
+        "code": "reproductive_genetic",
+        "name": "Reproductive & Genetic Risks",
+        "items": [
+          "n14",
+          "n15"
+        ]
+      },
+      {
+        "code": "mental_health_safety",
+        "name": "Mental Health & Safety",
+        "items": [
+          "n16",
+          "n17",
+          "n18"
+        ]
+      }
+    ]
+  },
+  "bands": [
+    {
+      "code": "high",
+      "label": "High Readiness",
+      "min": 75
+    },
+    {
+      "code": "moderate",
+      "label": "Moderate Readiness",
+      "min": 50
+    },
+    {
+      "code": "low",
+      "label": "Low Readiness",
+      "min": 0
+    }
+  ],
+  "safetyRules": [
+    {
+      "flag": "relationship_safety",
+      "whenAnyOption": [
+        "e33.b",
+        "e33.c",
+        "n17.b",
+        "n17.c"
+      ],
+      "status": "proposed_requires_clinical_approval"
+    },
+    {
+      "flag": "mental_health_active",
+      "whenAnyOption": [
+        "e36.c"
+      ],
+      "status": "proposed_requires_clinical_approval"
+    }
+  ],
+  "clinicalFlags": [
+    "CF-01",
+    "CF-02",
+    "CF-03",
+    "CF-04",
+    "CF-05",
+    "CF-06",
+    "CF-07",
+    "CF-08",
+    "CF-09",
+    "CF-10",
+    "CF-11",
+    "CF-12",
+    "CF-13",
+    "CF-14"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "purpose": "Routing conformance for rra-defs-legacy-1. The engine's routing code must pass every case, both as tested here and as bundled in the app. Derived from vProf() and goBack1C() in legacy_rra.html, plus the purge rule (L-07).",
+  "definitionId": "rra-defs-legacy-1",
+  "pathwayCases": [
+    { "name": "planning yes, ever pregnant", "profile": { "plan": "yes", "everpreg": "yes" }, "pathway": "pregnancy_planning", "sections": ["P1B", "P1C", "P1D", "P1E"] },
+    { "name": "planning yes, never pregnant", "profile": { "plan": "yes", "everpreg": "no" }, "pathway": "pregnancy_planning", "sections": ["P1C", "P1D", "P1E"] },
+    { "name": "unsure, ever pregnant", "profile": { "plan": "unsure", "everpreg": "yes" }, "pathway": "pregnancy_planning", "sections": ["P1B", "P1C", "P1D", "P1E"] },
+    { "name": "unsure, never pregnant", "profile": { "plan": "unsure", "everpreg": "no" }, "pathway": "pregnancy_planning", "sections": ["P1C", "P1D", "P1E"] },
+    { "name": "not planning, ever pregnant", "profile": { "plan": "no", "everpreg": "yes" }, "pathway": "general_wellness", "sections": ["P2Q"] },
+    { "name": "not planning, never pregnant", "profile": { "plan": "no", "everpreg": "no" }, "pathway": "general_wellness", "sections": ["P2Q"] }
+  ],
+  "purgeCases": [
+    { "name": "stop being ever-pregnant drops obstetric history only", "to": { "plan": "yes", "everpreg": "no" }, "answered": ["b10", "b18", "c19", "e45"], "purged": ["b10", "b18"], "kept": ["c19", "e45"] },
+    { "name": "switch to not planning drops all pregnancy-path answers", "to": { "plan": "no", "everpreg": "yes" }, "answered": ["b10", "c19", "d28", "e33"], "purged": ["b10", "c19", "d28", "e33"], "kept": [] },
+    { "name": "switch to planning drops wellness answers", "to": { "plan": "yes", "everpreg": "no" }, "answered": ["n1", "n2", "n18"], "purged": ["n1", "n2", "n18"], "kept": [] },
+    { "name": "unsure to yes keeps everything", "to": { "plan": "yes", "everpreg": "no" }, "answered": ["c19", "d32"], "purged": [], "kept": ["c19", "d32"] },
+    { "name": "becoming ever-pregnant adds a section, drops nothing", "to": { "plan": "yes", "everpreg": "yes" }, "answered": ["c19"], "purged": [], "kept": ["c19"] }
+  ]
+}

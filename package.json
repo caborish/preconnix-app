@@ -1,0 +1,26 @@
+{
+  "name": "preconnix",
+  "private": true,
+  "description": "PreConnix monorepo: Expo app, API, assessment engine and shared contracts",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/mobile",
+    "services/*"
+  ],
+  "scripts": {
+    "test": "node --test \"packages/*/test/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "mobile": "npm --workspace @preconnix/mobile run start",
+    "typecheck:mobile": "tsc -p apps/mobile",
+    "api": "npm --workspace @preconnix/api run start",
+    "test:api": "npm --workspace @preconnix/api test",
+    "test:mobile": "node --test \"apps/mobile/test/*.test.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}

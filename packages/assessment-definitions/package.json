@@ -1,0 +1,11 @@
+{
+  "name": "@preconnix/assessment-definitions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Versioned assessment definitions (questions, options, routing). Contain no scores; safe to bundle in the app.",
+  "exports": {
+    "./rra/rra-defs-legacy-1.json": "./rra/rra-defs-legacy-1.json",
+    "./rra/rra-defs-1.1.json": "./rra/rra-defs-1.1.json",
+    "./rra/rra-defs-2.0.json": "./rra/rra-defs-2.0.json"
+  }
+}

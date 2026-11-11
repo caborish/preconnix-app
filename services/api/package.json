@@ -1,0 +1,27 @@
+{
+  "name": "@preconnix/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PreConnix API. Local mode uses PGlite and a dev sign-in; staging/production use Azure (ADR-013).",
+  "scripts": {
+    "start": "node src/main.ts",
+    "test": "node --test --test-timeout=60000 test/*.test.ts"
+  },
+  "dependencies": {
+    "@azure/communication-email": "^1.1.0",
+    "@azure/identity": "^4.14.1",
+    "@azure/keyvault-secrets": "^4.12.0",
+    "@electric-sql/pglite": "0.5.10",
+    "@preconnix/assessment-definitions": "*",
+    "@preconnix/assessment-engine": "*",
+    "@preconnix/content": "*",
+    "fastify": "5.12.7",
+    "jose": "6.2.13",
+    "pg": "^8.23.1",
+    "puppeteer-core": "^25.16.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1"
+  }
+}

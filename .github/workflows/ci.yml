@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: API tests (PGlite, synthetic data)
+        run: npm run test:api
+      - name: App unit tests (report)
+        run: npm run test:mobile
+      - name: App type-check
+        run: npm run typecheck:mobile
+      - name: No secrets committed
+        run: |
+          if git grep -nE 'sk-(proj-)?[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA |EC )?PRIVATE KEY' -- ':!node_modules'; then
+            echo "Possible secret found"; exit 1
+          fi
+
+  api-postgres:
+    # Same API tests on real PostgreSQL 17, logged in as a non-superuser like Azure's administrator.
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_PASSWORD: ci-only-not-a-secret
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Azure-like administrator role
+        run: >-
+          docker exec ${{ job.services.postgres.id }} psql -U postgres
+          -c "CREATE ROLE pcx_admin LOGIN PASSWORD 'ci-only-not-a-secret' CREATEDB CREATEROLE;"
+      - name: API tests (PostgreSQL)
+        run: npm run test:api
+        env:
+          TEST_DATABASE_URL: postgres://pcx_admin:ci-only-not-a-secret@localhost:5432/postgres
+      - name: API container image builds
+        run: docker build -f services/api/Dockerfile -t preconnix-api:ci .

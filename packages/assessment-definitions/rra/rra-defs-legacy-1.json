@@ -1,0 +1,1316 @@
+{
+  "definitionId": "rra-defs-legacy-1",
+  "instrument": "RRA",
+  "status": "testing",
+  "source": {
+    "file": "legacy/source/legacy_rra.html",
+    "sha256": "fa4589dbfa3ffc1d3e8a911ec8a44e625f41d5e6b5b9e5df9657060cde690a5f"
+  },
+  "pathways": [
+    {
+      "id": "general_wellness",
+      "when": {
+        "all": [
+          {
+            "field": "plan",
+            "eq": "no"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pregnancy_planning",
+      "when": {
+        "all": [
+          {
+            "field": "plan",
+            "in": [
+              "yes",
+              "unsure"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "profile": [
+    {
+      "id": "age",
+      "label": "Your Age",
+      "required": true,
+      "options": [
+        {
+          "id": "profile.age.20-34",
+          "value": "20-34",
+          "label": "20 – 34"
+        },
+        {
+          "id": "profile.age.u20",
+          "value": "u20",
+          "label": "Under 20"
+        },
+        {
+          "id": "profile.age.35-39",
+          "value": "35-39",
+          "label": "35 – 39"
+        },
+        {
+          "id": "profile.age.40+",
+          "value": "40+",
+          "label": "40 or older"
+        }
+      ]
+    },
+    {
+      "id": "country",
+      "label": "Country of Residence",
+      "required": true,
+      "options": [
+        {
+          "id": "profile.country.NG",
+          "value": "NG",
+          "label": "Nigeria"
+        }
+      ]
+    },
+    {
+      "id": "cycle",
+      "label": "Menstrual Cycle",
+      "required": true,
+      "options": [
+        {
+          "id": "profile.cycle.regular",
+          "value": "regular",
+          "label": "Regular (every 21–35 days)"
+        },
+        {
+          "id": "profile.cycle.irregular",
+          "value": "irregular",
+          "label": "Irregular"
+        },
+        {
+          "id": "profile.cycle.absent",
+          "value": "absent",
+          "label": "Absent or very infrequent"
+        }
+      ]
+    },
+    {
+      "id": "everpreg",
+      "label": "Have you ever been pregnant?",
+      "required": true,
+      "options": [
+        {
+          "id": "profile.everpreg.yes",
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "profile.everpreg.no",
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "label": "Do you plan to become pregnant in the next year?",
+      "required": true,
+      "options": [
+        {
+          "id": "profile.plan.yes",
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "profile.plan.unsure",
+          "value": "unsure",
+          "label": "I'm not sure yet"
+        },
+        {
+          "id": "profile.plan.no",
+          "value": "no",
+          "label": "No, not in the near future"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "P1B",
+      "tag": "Section B",
+      "title": "Reproductive & Obstetric History",
+      "subtitle": "Understanding past pregnancies helps assess current readiness.",
+      "applicableWhen": {
+        "all": [
+          {
+            "field": "plan",
+            "in": [
+              "yes",
+              "unsure"
+            ]
+          },
+          {
+            "field": "everpreg",
+            "eq": "yes"
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "b10",
+          "number": 10,
+          "text": "How many times have you been pregnant in total?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b10.a",
+              "label": "3 or fewer"
+            },
+            {
+              "id": "b10.b",
+              "label": "4 to 5"
+            },
+            {
+              "id": "b10.c",
+              "label": "More than 5"
+            }
+          ]
+        },
+        {
+          "id": "b11",
+          "number": 11,
+          "text": "Have you ever had a baby arrive before 37 weeks (premature birth)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b11.a",
+              "label": "No"
+            },
+            {
+              "id": "b11.b",
+              "label": "Once"
+            },
+            {
+              "id": "b11.c",
+              "label": "More than once"
+            }
+          ]
+        },
+        {
+          "id": "b12",
+          "number": 12,
+          "text": "Have you experienced any miscarriages (spontaneous pregnancy loss)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b12.a",
+              "label": "No"
+            },
+            {
+              "id": "b12.b",
+              "label": "Once"
+            },
+            {
+              "id": "b12.c",
+              "label": "More than once"
+            }
+          ]
+        },
+        {
+          "id": "b13",
+          "number": 13,
+          "text": "Have you had any induced abortions (pregnancy terminations)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b13.a",
+              "label": "No"
+            },
+            {
+              "id": "b13.b",
+              "label": "Once"
+            },
+            {
+              "id": "b13.c",
+              "label": "More than once"
+            }
+          ]
+        },
+        {
+          "id": "b14",
+          "number": 14,
+          "text": "Have you experienced a stillbirth?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b14.a",
+              "label": "No"
+            },
+            {
+              "id": "b14.b",
+              "label": "Once"
+            },
+            {
+              "id": "b14.c",
+              "label": "More than once"
+            }
+          ]
+        },
+        {
+          "id": "b15",
+          "number": 15,
+          "text": "Were any of your previous children born with birth defects or congenital conditions?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b15.a",
+              "label": "No"
+            },
+            {
+              "id": "b15.b",
+              "label": "Yes, and it was investigated"
+            },
+            {
+              "id": "b15.c",
+              "label": "Yes, and it remains unresolved"
+            }
+          ]
+        },
+        {
+          "id": "b16",
+          "number": 16,
+          "text": "Did you experience gestational diabetes, preeclampsia, or high blood pressure during any pregnancy?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b16.a",
+              "label": "None of these"
+            },
+            {
+              "id": "b16.b",
+              "label": "Once, and it resolved"
+            },
+            {
+              "id": "b16.c",
+              "label": "More than once or ongoing"
+            }
+          ]
+        },
+        {
+          "id": "b17",
+          "number": 17,
+          "text": "How long ago was your most recent pregnancy?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b17.a",
+              "label": "18 months to 4 years ago"
+            },
+            {
+              "id": "b17.b",
+              "label": "4 to 5 years ago"
+            },
+            {
+              "id": "b17.c",
+              "label": "Less than 18 months or more than 5 years ago"
+            }
+          ]
+        },
+        {
+          "id": "b18",
+          "number": 18,
+          "text": "What was the outcome of your most recent pregnancy?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "b18.a",
+              "label": "Healthy, full-term delivery"
+            },
+            {
+              "id": "b18.b",
+              "label": "Complicated but managed"
+            },
+            {
+              "id": "b18.c",
+              "label": "Poor outcome"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P1C",
+      "tag": "Section C",
+      "title": "Physical Health & Medical Care",
+      "subtitle": "Healthcare access, nutrition, and physical wellbeing.",
+      "applicableWhen": {
+        "all": [
+          {
+            "field": "plan",
+            "in": [
+              "yes",
+              "unsure"
+            ]
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "c19",
+          "number": 19,
+          "text": "Do you have a regular doctor, nurse, or primary healthcare provider?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c19.a",
+              "label": "Yes"
+            },
+            {
+              "id": "c19.b",
+              "label": "I see one occasionally"
+            },
+            {
+              "id": "c19.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "c20",
+          "number": 20,
+          "text": "When was your last general health check-up?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c20.a",
+              "label": "Within the past year"
+            },
+            {
+              "id": "c20.b",
+              "label": "1 to 3 years ago"
+            },
+            {
+              "id": "c20.c",
+              "label": "More than 3 years ago"
+            }
+          ]
+        },
+        {
+          "id": "c21",
+          "number": 21,
+          "text": "Do you take a daily folic acid supplement (0.4–5mg)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c21.a",
+              "label": "Yes, regularly"
+            },
+            {
+              "id": "c21.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "c21.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "c22",
+          "number": 22,
+          "text": "Are your vaccinations up to date? (e.g., MMR, Tetanus, Hepatitis B, HPV, Flu)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c22.a",
+              "label": "All up to date"
+            },
+            {
+              "id": "c22.b",
+              "label": "Some may be missing"
+            },
+            {
+              "id": "c22.c",
+              "label": "Not sure or none up to date"
+            }
+          ]
+        },
+        {
+          "id": "c23",
+          "number": 23,
+          "text": "Do you have any chronic health conditions? (e.g., diabetes, hypertension, thyroid, asthma, seizures)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c23.a",
+              "label": "None, or well-controlled"
+            },
+            {
+              "id": "c23.b",
+              "label": "Somewhat controlled"
+            },
+            {
+              "id": "c23.c",
+              "label": "Poorly controlled"
+            }
+          ]
+        },
+        {
+          "id": "c24",
+          "number": 24,
+          "text": "How is your oral health? (recent dental visit, no untreated gum disease)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c24.a",
+              "label": "Good"
+            },
+            {
+              "id": "c24.b",
+              "label": "Some issues"
+            },
+            {
+              "id": "c24.c",
+              "label": "Poor or untreated problems"
+            }
+          ]
+        },
+        {
+          "id": "c25",
+          "number": 25,
+          "text": "Do you get at least 150 minutes of moderate physical activity per week?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c25.a",
+              "label": "Yes, consistently"
+            },
+            {
+              "id": "c25.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "c25.c",
+              "label": "Rarely or never"
+            }
+          ]
+        },
+        {
+          "id": "c26",
+          "number": 26,
+          "text": "How would you describe your overall diet?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c26.a",
+              "label": "Balanced — fruits, vegetables, whole grains, and protein regularly"
+            },
+            {
+              "id": "c26.b",
+              "label": "Somewhat balanced"
+            },
+            {
+              "id": "c26.c",
+              "label": "Mostly processed or fast food"
+            }
+          ]
+        },
+        {
+          "id": "c27",
+          "number": 27,
+          "text": "Have you reviewed all your medications (prescription and over-the-counter) with a healthcare provider for pregnancy safety?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "c27.a",
+              "label": "Yes, all reviewed"
+            },
+            {
+              "id": "c27.b",
+              "label": "Some reviewed"
+            },
+            {
+              "id": "c27.c",
+              "label": "None reviewed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P1D",
+      "tag": "Section D",
+      "title": "Sexual & Substance Health",
+      "subtitle": "Important health screenings and substance use patterns.",
+      "applicableWhen": {
+        "all": [
+          {
+            "field": "plan",
+            "in": [
+              "yes",
+              "unsure"
+            ]
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "d28",
+          "number": 28,
+          "text": "When was your last STI screening? (e.g., chlamydia, gonorrhoea, syphilis, HIV, hepatitis)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "d28.a",
+              "label": "Within the past year"
+            },
+            {
+              "id": "d28.b",
+              "label": "More than a year ago"
+            },
+            {
+              "id": "d28.c",
+              "label": "Never"
+            }
+          ]
+        },
+        {
+          "id": "d29",
+          "number": 29,
+          "text": "Do you or your partner smoke tobacco or use nicotine products?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "d29.a",
+              "label": "No"
+            },
+            {
+              "id": "d29.b",
+              "label": "Quit or currently reducing"
+            },
+            {
+              "id": "d29.c",
+              "label": "Yes, currently"
+            }
+          ]
+        },
+        {
+          "id": "d30",
+          "number": 30,
+          "text": "Do you or your partner consume alcohol?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "d30.a",
+              "label": "None"
+            },
+            {
+              "id": "d30.b",
+              "label": "Occasionally"
+            },
+            {
+              "id": "d30.c",
+              "label": "Frequently or binge drinking"
+            }
+          ]
+        },
+        {
+          "id": "d31",
+          "number": 31,
+          "text": "Do you use recreational drugs, cannabis, or misuse prescription medications?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "d31.a",
+              "label": "No"
+            },
+            {
+              "id": "d31.b",
+              "label": "Rarely"
+            },
+            {
+              "id": "d31.c",
+              "label": "Yes"
+            }
+          ]
+        },
+        {
+          "id": "d32",
+          "number": 32,
+          "text": "Are you aware of how fertility changes with age? (e.g., decline after 35, assisted reproduction limitations after 40)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "d32.a",
+              "label": "Yes, well informed"
+            },
+            {
+              "id": "d32.b",
+              "label": "Somewhat aware"
+            },
+            {
+              "id": "d32.c",
+              "label": "Not aware"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P1E",
+      "tag": "Section E",
+      "title": "Mental, Social & Environmental",
+      "subtitle": "Emotional readiness, social support, and environment.",
+      "applicableWhen": {
+        "all": [
+          {
+            "field": "plan",
+            "in": [
+              "yes",
+              "unsure"
+            ]
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "e33",
+          "number": 33,
+          "text": "Do you feel safe in your current relationship?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e33.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e33.b",
+              "label": "Unsure"
+            },
+            {
+              "id": "e33.c",
+              "label": "No, I feel unsafe"
+            }
+          ]
+        },
+        {
+          "id": "e34",
+          "number": 34,
+          "text": "Do you have a supportive network of family, friends, or community?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e34.a",
+              "label": "Strong support"
+            },
+            {
+              "id": "e34.b",
+              "label": "Some support"
+            },
+            {
+              "id": "e34.c",
+              "label": "Little to no support"
+            }
+          ]
+        },
+        {
+          "id": "e35",
+          "number": 35,
+          "text": "Do you feel emotionally ready for a pregnancy?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e35.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e35.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "e35.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e36",
+          "number": 36,
+          "text": "Have you been screened or treated for depression, anxiety, or other mental health conditions?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e36.a",
+              "label": "None, or well-managed"
+            },
+            {
+              "id": "e36.b",
+              "label": "Somewhat managed"
+            },
+            {
+              "id": "e36.c",
+              "label": "Active or untreated"
+            }
+          ]
+        },
+        {
+          "id": "e37",
+          "number": 37,
+          "text": "Do you usually get 7–9 hours of sleep per night?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e37.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e37.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "e37.c",
+              "label": "Rarely"
+            }
+          ]
+        },
+        {
+          "id": "e38",
+          "number": 38,
+          "text": "Do you have effective strategies to manage stress? (e.g., exercise, counselling, support groups, hobbies)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e38.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e38.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "e38.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e39",
+          "number": 39,
+          "text": "Do you have stable housing?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e39.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e39.b",
+              "label": "Somewhat stable"
+            },
+            {
+              "id": "e39.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e40",
+          "number": 40,
+          "text": "Do you have the financial resources or a plan to support a child?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e40.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e40.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "e40.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e41",
+          "number": 41,
+          "text": "Are you regularly exposed to workplace or environmental hazards? (e.g., radiation, solvents, pesticides)",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e41.a",
+              "label": "No known exposure"
+            },
+            {
+              "id": "e41.b",
+              "label": "Some exposure"
+            },
+            {
+              "id": "e41.c",
+              "label": "Frequent or high exposure"
+            }
+          ]
+        },
+        {
+          "id": "e42",
+          "number": 42,
+          "text": "Do you have reliable access to transportation and healthcare services when needed?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e42.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e42.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "e42.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e43",
+          "number": 43,
+          "text": "Do you know where to access mental health, addiction, or social support services if needed?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e43.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e43.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "e43.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e44",
+          "number": 44,
+          "text": "Do you feel confident you could balance work, education, and family responsibilities with a pregnancy?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e44.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e44.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "e44.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "e45",
+          "number": 45,
+          "text": "Have you created a written reproductive life plan (alone or with a healthcare provider)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "e45.a",
+              "label": "Yes"
+            },
+            {
+              "id": "e45.b",
+              "label": "Started one"
+            },
+            {
+              "id": "e45.c",
+              "label": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P2Q",
+      "tag": "Reproductive Health Check",
+      "title": "Your General Reproductive Wellness",
+      "subtitle": "Even if pregnancy isn't planned right now, understanding your reproductive health is empowering.",
+      "applicableWhen": {
+        "all": [
+          {
+            "field": "plan",
+            "eq": "no"
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "n1",
+          "number": 1,
+          "text": "Do you want to have children at any point in the future?",
+          "sectionDivider": "Family Planning & Contraception",
+          "options": [
+            {
+              "id": "n1.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n1.b",
+              "label": "Unsure"
+            },
+            {
+              "id": "n1.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n2",
+          "number": 2,
+          "text": "Are you currently using a reliable method of contraception?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n2.a",
+              "label": "Yes, consistently"
+            },
+            {
+              "id": "n2.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "n2.c",
+              "label": "Not at all"
+            }
+          ]
+        },
+        {
+          "id": "n3",
+          "number": 3,
+          "text": "Have you discussed birth control options with a healthcare provider?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n3.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n3.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "n3.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n4",
+          "number": 4,
+          "text": "Do you and your partner agree about not becoming pregnant in the next year?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n4.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n4.b",
+              "label": "Unsure"
+            },
+            {
+              "id": "n4.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n5",
+          "number": 5,
+          "text": "Do you take a daily multivitamin with folic acid for general health?",
+          "sectionDivider": "Physical & Nutritional Health",
+          "options": [
+            {
+              "id": "n5.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n5.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "n5.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n6",
+          "number": 6,
+          "text": "Do you eat a balanced diet with sufficient fruits, vegetables, and iron-rich foods?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n6.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n6.b",
+              "label": "Somewhat"
+            },
+            {
+              "id": "n6.c",
+              "label": "Poor diet"
+            }
+          ]
+        },
+        {
+          "id": "n7",
+          "number": 7,
+          "text": "Are your vaccinations up to date? (e.g., Hepatitis B, Rubella, HPV, Flu)",
+          "sectionDivider": "Infectious Diseases & Immunizations",
+          "options": [
+            {
+              "id": "n7.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n7.b",
+              "label": "Some gaps"
+            },
+            {
+              "id": "n7.c",
+              "label": "Not sure or none"
+            }
+          ]
+        },
+        {
+          "id": "n8",
+          "number": 8,
+          "text": "Have you been tested for HIV, hepatitis, or other STIs in the past year?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n8.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n8.b",
+              "label": "More than a year ago"
+            },
+            {
+              "id": "n8.c",
+              "label": "Never"
+            }
+          ]
+        },
+        {
+          "id": "n9",
+          "number": 9,
+          "text": "Do you have any chronic medical conditions? (e.g., diabetes, hypertension, thyroid)",
+          "sectionDivider": "Chronic Conditions & Medications",
+          "options": [
+            {
+              "id": "n9.a",
+              "label": "None or well-controlled"
+            },
+            {
+              "id": "n9.b",
+              "label": "Somewhat controlled"
+            },
+            {
+              "id": "n9.c",
+              "label": "Poorly controlled"
+            }
+          ]
+        },
+        {
+          "id": "n10",
+          "number": 10,
+          "text": "Have you reviewed your current medications or supplements with a provider for pregnancy safety?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n10.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n10.b",
+              "label": "Some reviewed"
+            },
+            {
+              "id": "n10.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n11",
+          "number": 11,
+          "text": "In the past year, how often have you had 4 or more alcoholic drinks in one occasion?",
+          "sectionDivider": "Substance Use",
+          "options": [
+            {
+              "id": "n11.a",
+              "label": "Never"
+            },
+            {
+              "id": "n11.b",
+              "label": "Occasionally"
+            },
+            {
+              "id": "n11.c",
+              "label": "Monthly or more often"
+            }
+          ]
+        },
+        {
+          "id": "n12",
+          "number": 12,
+          "text": "Do you currently smoke tobacco or use vaping products?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n12.a",
+              "label": "No"
+            },
+            {
+              "id": "n12.b",
+              "label": "Quit or reducing"
+            },
+            {
+              "id": "n12.c",
+              "label": "Yes"
+            }
+          ]
+        },
+        {
+          "id": "n13",
+          "number": 13,
+          "text": "Do you use recreational drugs or misuse prescription medications?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n13.a",
+              "label": "Never"
+            },
+            {
+              "id": "n13.b",
+              "label": "Rarely or trying to stop"
+            },
+            {
+              "id": "n13.c",
+              "label": "Yes, regularly"
+            }
+          ]
+        },
+        {
+          "id": "n14",
+          "number": 14,
+          "text": "Have you ever experienced pregnancy complications? (e.g., miscarriage, preterm birth, birth defects)",
+          "sectionDivider": "Reproductive & Genetic Risks",
+          "options": [
+            {
+              "id": "n14.a",
+              "label": "None"
+            },
+            {
+              "id": "n14.b",
+              "label": "One event"
+            },
+            {
+              "id": "n14.c",
+              "label": "Multiple or unresolved"
+            }
+          ]
+        },
+        {
+          "id": "n15",
+          "number": 15,
+          "text": "Do you or your partner have a family history of genetic conditions, birth defects, or multiple miscarriages?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n15.a",
+              "label": "No"
+            },
+            {
+              "id": "n15.b",
+              "label": "Unsure"
+            },
+            {
+              "id": "n15.c",
+              "label": "Yes"
+            }
+          ]
+        },
+        {
+          "id": "n16",
+          "number": 16,
+          "text": "Have you been screened for depression, anxiety, or other mental health conditions in the past year?",
+          "sectionDivider": "Mental Health & Safety",
+          "options": [
+            {
+              "id": "n16.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n16.b",
+              "label": "Not sure"
+            },
+            {
+              "id": "n16.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n17",
+          "number": 17,
+          "text": "Do you feel safe in your relationships (no threat, violence, or coercion)?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n17.a",
+              "label": "Yes"
+            },
+            {
+              "id": "n17.b",
+              "label": "Sometimes"
+            },
+            {
+              "id": "n17.c",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "id": "n18",
+          "number": 18,
+          "text": "Do you have social and emotional support when facing stress or major life decisions?",
+          "sectionDivider": null,
+          "options": [
+            {
+              "id": "n18.a",
+              "label": "Strong support"
+            },
+            {
+              "id": "n18.b",
+              "label": "Some support"
+            },
+            {
+              "id": "n18.c",
+              "label": "None"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

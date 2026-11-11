@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  title: PreConnix API
+  version: 1.0.0-draft
+  description: >
+    DRAFT contract for approval. Core assessment, result and report endpoints.
+    Remaining endpoints are catalogued in docs/architecture/05_api_specification.md
+    and are added here when their ticket starts.
+servers:
+  - url: https://api.staging.preconnix.com/v1
+    description: Staging (synthetic data only). Not provisioned yet.
+security:
+  - bearerAuth: []
+paths:
+  /assessment-definitions/current:
+    get:
+      operationId: getCurrentDefinition
+      security: []
+      parameters:
+        - {name: country, in: query, required: true, schema: {type: string, pattern: '^[A-Z]{2}$'}}
+        - {name: locale, in: query, schema: {type: string, default: en}}
+      responses:
+        '200': {description: Client definition (option scores stripped), content: {application/json: {schema: {$ref: '#/components/schemas/ClientDefinition'}}}}
+  /assessments:
+    post:
+      operationId: createAssessment
+      parameters: [{$ref: '#/components/parameters/IdempotencyKey'}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {type: object, required: [definitionId], properties: {definitionId: {type: string}}}}}
+      responses:
+        '201': {description: Draft created, content: {application/json: {schema: {$ref: '#/components/schemas/Assessment'}}}}
+        '412': {$ref: '#/components/responses/Problem'}
+    get:
+      operationId: listAssessments
+      parameters:
+        - {name: status, in: query, schema: {type: string, enum: [draft, scored]}}
+        - {name: cursor, in: query, schema: {type: string}}
+        - {name: limit, in: query, schema: {type: integer, maximum: 50, default: 20}}
+      responses:
+        '200':
+          description: History
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items: {type: array, items: {$ref: '#/components/schemas/AssessmentSummary'}}
+                  nextCursor: {type: [string, 'null']}
+  /assessments/{assessmentId}/profile:
+    put:
+      operationId: putProfile
+      parameters: [{$ref: '#/components/parameters/AssessmentId'}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: '#/components/schemas/ProfileAnswers'}}}
+      responses:
+        '200':
+          description: Profile stored; routing recalculated
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [applicableSections, purgedQuestionIds]
+                properties:
+                  applicableSections: {type: array, items: {type: string}}
+                  purgedQuestionIds: {type: array, items: {type: string}}
+        '422': {$ref: '#/components/responses/Problem'}
+  /assessments/{assessmentId}/answers:
+    put:
+      operationId: putAnswers
+      parameters: [{$ref: '#/components/parameters/AssessmentId'}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [answers]
+              properties:
+                answers:
+                  type: array
+                  maxItems: 60
+                  items: {$ref: '#/components/schemas/Answer'}
+      responses:
+        '204': {description: Stored}
+        '404': {$ref: '#/components/responses/Problem'}
+        '422': {$ref: '#/components/responses/Problem'}
+  /assessments/{assessmentId}/submit:
+    post:
+      operationId: submitAssessment
+      parameters: [{$ref: '#/components/parameters/AssessmentId'}, {$ref: '#/components/parameters/IdempotencyKey'}]
+      responses:
+        '200': {description: Scored, content: {application/json: {schema: {$ref: '#/components/schemas/AssessmentResult'}}}}
+        '409': {$ref: '#/components/responses/Problem'}
+        '412': {$ref: '#/components/responses/Problem'}
+  /assessments/{assessmentId}/result:
+    get:
+      operationId: getResult
+      parameters: [{$ref: '#/components/parameters/AssessmentId'}]
+      responses:
+        '200': {description: Result, content: {application/json: {schema: {$ref: '#/components/schemas/AssessmentResult'}}}}
+        '404': {$ref: '#/components/responses/Problem'}
+  /assessments/{assessmentId}/reports:
+    post:
+      operationId: requestReport
+      parameters: [{$ref: '#/components/parameters/AssessmentId'}, {$ref: '#/components/parameters/IdempotencyKey'}]
+      responses:
+        '202': {description: Accepted, content: {application/json: {schema: {$ref: '#/components/schemas/ReportStatus'}}}}
+        '429': {$ref: '#/components/responses/Problem'}
+  /reports/{reportId}:
+    get:
+      operationId: getReportStatus
+      parameters: [{name: reportId, in: path, required: true, schema: {type: string, format: uuid}}]
+      responses:
+        '200': {description: Status, content: {application/json: {schema: {$ref: '#/components/schemas/ReportStatus'}}}}
+  /reports/{reportId}/download:
+    get:
+      operationId: getReportDownload
+      parameters: [{name: reportId, in: path, required: true, schema: {type: string, format: uuid}}]
+      responses:
+        '200':
+          description: Short-lived download URL
+          content:
+            application/json:
+              schema: {type: object, required: [url, expiresAt], properties: {url: {type: string, format: uri}, expiresAt: {type: string, format: date-time}}}
+        '409': {description: Report not ready, $ref: '#/components/responses/Problem'}
+  /me:
+    delete:
+      operationId: deleteAccount
+      responses:
+        '202': {description: Deletion scheduled; tokens revoked}
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer, bearerFormat: JWT}
+  parameters:
+    AssessmentId: {name: assessmentId, in: path, required: true, schema: {type: string, format: uuid}}
+    IdempotencyKey: {name: Idempotency-Key, in: header, required: true, schema: {type: string, format: uuid}}
+  responses:
+    Problem:
+      description: RFC 9457 problem
+      content:
+        application/problem+json:
+          schema: {$ref: '#/components/schemas/Problem'}
+  schemas:
+    Problem:
+      type: object
+      required: [type, title, status, code, requestId]
+      properties:
+        type: {type: string, format: uri}
+        title: {type: string}
+        status: {type: integer}
+        code: {type: string}
+        requestId: {type: string}
+        missingQuestionIds: {type: array, items: {type: string}}
+    Option:
+      type: object
+      required: [id, label]
+      properties: {id: {type: string}, label: {type: string}}
+      additionalProperties: false
+    Question:
+      type: object
+      required: [id, number, text, options]
+      properties:
+        id: {type: string, pattern: '^[a-z][0-9]{1,2}$'}
+        number: {type: integer}
+        text: {type: string}
+        sectionDivider: {type: [string, 'null']}
+        options: {type: array, minItems: 2, items: {$ref: '#/components/schemas/Option'}}
+    ClientDefinition:
+      type: object
+      required: [definitionId, contentSha256, status, profile, sections]
+      properties:
+        definitionId: {type: string}
+        contentSha256: {type: string}
+        status: {type: string, enum: [testing, approved]}
+        profile:
+          type: array
+          items: {type: object, required: [id, label, options], properties: {id: {type: string}, label: {type: string}, options: {type: array, items: {$ref: '#/components/schemas/Option'}}}}
+        sections:
+          type: array
+          items:
+            type: object
+            required: [id, title, applicableWhen, questions]
+            properties:
+              id: {type: string}
+              title: {type: string}
+              tag: {type: string}
+              applicableWhen: {type: object, description: Declarative rule (see conformance fixtures)}
+              questions: {type: array, items: {$ref: '#/components/schemas/Question'}}
+    ProfileAnswers:
+      type: object
+      required: [age, country, cycle, everpreg, plan]
+      properties:
+        age: {type: string, enum: [profile.age.u20, profile.age.20-34, profile.age.35-39, profile.age.40+]}
+        country: {type: string, pattern: '^profile\.country\.[A-Z]{2}$'}
+        cycle: {type: string, enum: [profile.cycle.regular, profile.cycle.irregular, profile.cycle.absent]}
+        everpreg: {type: string, enum: [profile.everpreg.yes, profile.everpreg.no]}
+        plan: {type: string, enum: [profile.plan.yes, profile.plan.unsure, profile.plan.no]}
+    Answer:
+      type: object
+      required: [questionId, optionId]
+      properties:
+        questionId: {type: string}
+        optionId: {type: string}
+      additionalProperties: false
+    Assessment:
+      type: object
+      required: [id, status, definitionId, scoringPolicyId, startedAt]
+      properties:
+        id: {type: string, format: uuid}
+        status: {type: string, enum: [draft, submitted, scored, voided]}
+        definitionId: {type: string}
+        scoringPolicyId: {type: string}
+        pathway: {type: [string, 'null'], enum: [pregnancy_planning, general_wellness, null]}
+        startedAt: {type: string, format: date-time}
+    AssessmentSummary:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        submittedAt: {type: string, format: date-time}
+        pathway: {type: string}
+        score: {type: integer}
+        band: {type: string}
+        scoringPolicyId: {type: string}
+    AssessmentResult:
+      type: object
+      required: [assessmentId, pathway, definitionId, scoringPolicyId, scoringStatus, engineBuild, overall, domains, safetyFlags, computedAt, resultSha256]
+      properties:
+        assessmentId: {type: string, format: uuid}
+        pathway: {type: string, enum: [pregnancy_planning, general_wellness]}
+        definitionId: {type: string}
+        scoringPolicyId: {type: string}
+        scoringStatus: {type: string, enum: [legacy_unvalidated, approved_for_testing, clinically_approved]}
+        engineBuild: {type: string}
+        overall:
+          type: object
+          required: [score, earned, max, band, bandLabel]
+          properties:
+            score: {type: integer, minimum: 0, maximum: 100}
+            earned: {type: integer}
+            max: {type: integer}
+            band: {type: string, enum: [high, moderate, low]}
+            bandLabel: {type: string}
+        domains:
+          type: array
+          items:
+            type: object
+            required: [code, name, percent, earned, max]
+            properties:
+              code: {type: string}
+              name: {type: string}
+              percent: {type: integer, minimum: 0, maximum: 100}
+              earned: {type: integer}
+              max: {type: integer}
+        safetyFlags:
+          type: array
+          items: {type: object, required: [code], properties: {code: {type: string, enum: [relationship_safety, mental_health_active]}}}
+        computedAt: {type: string, format: date-time}
+        notes: {type: array, items: {type: string}, description: Plain lines from her answers shown with the result}
+        resultSha256: {type: string}
+    ReportStatus:
+      type: object
+      required: [reportId, status, provider]
+      properties:
+        reportId: {type: string, format: uuid}
+        status: {type: string, enum: [queued, generating, ready, failed, expired]}
+        provider: {type: string, enum: [mock, native, legacy_gas]}
+        errorCode: {type: [string, 'null'], enum: [provider_unavailable, timeout, template_error, rate_limited, null]}
+        watermark: {type: [string, 'null'], description: "Present for mock provider: 'SYNTHETIC — NOT A PRODUCTION REPORT'"}

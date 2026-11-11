@@ -1,0 +1,15 @@
+# Keep the API image small and free of local data, secrets and unrelated code.
+**/node_modules
+**/.data
+**/.expo
+**/*.key
+.git
+.github
+legacy
+docs
+tools
+website-backend
+contracts
+**/test
+**/*.test.ts
+.env*
